@@ -13,7 +13,9 @@ import melvinlin.com.mvpdemo.R;
 import melvinlin.com.mvpdemo.adapter.LatestNewsAdapter;
 import melvinlin.com.mvpdemo.presenter.LatestNewsPresenter;
 
-
+/**
+ * View層在一開始時關聯
+ */
 public class LatestViewActivity extends AppCompatActivity implements ILatestNewsView{
 
     private ListView mListView;

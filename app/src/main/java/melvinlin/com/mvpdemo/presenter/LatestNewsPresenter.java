@@ -14,6 +14,12 @@ import melvinlin.com.mvpdemo.model.IRequestLatestModel;
 import melvinlin.com.mvpdemo.model.RequestLatestNewsModel;
 import melvinlin.com.mvpdemo.view.ILatestNewsView;
 
+/**
+ * Presenter層，可控制
+ * 1.數據操作 Model 層
+ * 2.畫面變化 View 層
+ * 3.Handler 處理
+ */
 public class LatestNewsPresenter implements ILatestNewsPresenter {
 
     private static final String TAG = "LatestNewsPresenter";
@@ -22,6 +28,7 @@ public class LatestNewsPresenter implements ILatestNewsPresenter {
     private ILatestNewsView mILatestNewsView;
     private Handler mHandler = new Handler(Looper.getMainLooper());
 
+    //畫面資料帶進來，數據在建構子關聯就可以
     public LatestNewsPresenter(ILatestNewsView latestNewsView) {
         this.mILatestNewsView = latestNewsView;
         this.mDataServer = new RequestLatestNewsModel(this);

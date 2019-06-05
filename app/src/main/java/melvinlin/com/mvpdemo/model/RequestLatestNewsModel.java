@@ -12,6 +12,9 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
+/**
+ * Presenter層建構時關聯
+ */
 public class RequestLatestNewsModel implements IRequestLatestModel {
 
     private static final String TAG = "RequestLatestNewsModel";
