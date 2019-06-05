@@ -6,6 +6,10 @@ import melvinlin.com.mvpdemo.model.ILoginModel;
 import melvinlin.com.mvpdemo.model.LoginModel;
 import melvinlin.com.mvpdemo.view.ILoginView;
 
+/**
+ *
+ * P層實現類別,負責處理業務的邏輯
+ */
 public class LoginPresenter implements ILoginPresenter {
 
     private ILoginView mLoginView;

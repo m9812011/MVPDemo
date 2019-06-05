@@ -25,7 +25,7 @@ public class LoginModel implements ILoginModel {
                     e.printStackTrace();
                 }
 
-                if ("1111".equals(userName) && "1111".equals(password)) {
+                if ("1".equals(userName) && "1".equals(password)) {
                     User user = new User();
                     user.setUserName(userName);
                     user.setPassword(password);

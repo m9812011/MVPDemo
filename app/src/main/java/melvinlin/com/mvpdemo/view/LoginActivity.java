@@ -14,11 +14,14 @@ import melvinlin.com.mvpdemo.LoginSuccessActivity;
 import melvinlin.com.mvpdemo.R;
 import melvinlin.com.mvpdemo.presenter.LoginPresenter;
 
+/**
+ *  View 層實現類別,負責處理 UI 的邏輯
+ */
 public class LoginActivity extends AppCompatActivity implements ILoginView{
 
     private Button mLoginBtn;
     private EditText mUserName;
-    private EditText mPasseord;
+    private EditText mPassword;
     private ProgressBar mProgressBar;
 
     private LoginPresenter mLoginPresenter;
@@ -35,7 +38,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginView{
     private void initView() {
         mLoginBtn = (Button) findViewById(R.id.id_btn_login);
         mUserName = (EditText) findViewById(R.id.id_et_username);
-        mPasseord = (EditText) findViewById(R.id.id_et_password);
+        mPassword = (EditText) findViewById(R.id.id_et_password);
         mProgressBar = (ProgressBar) findViewById(R.id.id_progress_bar);
         mLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,7 +59,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginView{
 
     @Override
     public String getUserPassword() {
-        String password = mPasseord.getText().toString();
+        String password = mPassword.getText().toString();
         if (!TextUtils.isEmpty(password)) {
             return password;
         }
@@ -64,12 +67,13 @@ public class LoginActivity extends AppCompatActivity implements ILoginView{
     }
 
     @Override
-    public void showLoading(boolean isShow) {
+    public void showLoading(final boolean isShow) {
         if (isShow) {
             mProgressBar.setVisibility(View.VISIBLE);
         } else {
-            mProgressBar.setVisibility(View.GONE);
+            mProgressBar.setVisibility(View.INVISIBLE);
         }
+
     }
 
     @Override
