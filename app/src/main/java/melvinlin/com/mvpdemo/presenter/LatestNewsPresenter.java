@@ -3,15 +3,13 @@ package melvinlin.com.mvpdemo.presenter;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import melvinlin.com.mvpdemo.AppManager;
+import melvinlin.com.mvpdemo.Constants;
 import melvinlin.com.mvpdemo.bean.LatestNews;
-import melvinlin.com.mvpdemo.model.IRequestLatestModel;
-import melvinlin.com.mvpdemo.model.RequestLatestNewsModel;
 import melvinlin.com.mvpdemo.view.ILatestNewsView;
 
 /**
@@ -20,45 +18,38 @@ import melvinlin.com.mvpdemo.view.ILatestNewsView;
  * 2.畫面變化 View 層
  * 3.Handler 處理
  */
-public class LatestNewsPresenter implements ILatestNewsPresenter {
+public class LatestNewsPresenter extends BasePresenter<Nullable, LatestNews> {
 
     private static final String TAG = "LatestNewsPresenter";
-
-    private IRequestLatestModel mDataServer;
-    private ILatestNewsView mILatestNewsView;
+    private ILatestNewsView mBaseView;
     private Handler mHandler = new Handler(Looper.getMainLooper());
 
-    //畫面資料帶進來，數據在建構子關聯就可以
-    public LatestNewsPresenter(ILatestNewsView latestNewsView) {
-        this.mILatestNewsView = latestNewsView;
-        this.mDataServer = new RequestLatestNewsModel(this);
+    public LatestNewsPresenter(ILatestNewsView baseView, Class<LatestNews> clazz) {
+        super(baseView, clazz);
+        this.mBaseView = baseView;
+        getModel().setRequestUrl(Constants.LATEST_NEWS);
     }
 
+
     @Override
-    public void handleData(String jsonData) {
-        LatestNews latestNews = AppManager.getGson().fromJson(jsonData, LatestNews.class);
+    public void serverResponse(LatestNews latestNews) {
         if (latestNews != null) {
             final List<String> titles = new ArrayList<>();
             List<LatestNews.StoriesBean> stories = latestNews.getStories();
-            for (LatestNews.StoriesBean story : stories) {
+            for (LatestNews.StoriesBean story: stories) {
                 titles.add(story.getTitle());
             }
             if (titles.size() != 0) {
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        mILatestNewsView.showLatestViewTitle(titles);
+                        mBaseView.showLatestViewTitle(titles);
+                        mBaseView.showProgress(false);
                     }
                 });
+            } else {
+                Log.d(TAG, ">> handleData >> latestNews is null");
             }
-        } else {
-            Log.d(TAG, " >> handleData >> latestNews is null");
         }
     }
-
-    @Override
-    public void getDataFromServer() {
-        mDataServer.requestLatestNews();
-    }
-
 }

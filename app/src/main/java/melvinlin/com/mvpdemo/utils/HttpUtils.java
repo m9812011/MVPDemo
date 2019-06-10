@@ -1,11 +1,13 @@
 package melvinlin.com.mvpdemo.utils;
 
 import melvinlin.com.mvpdemo.AppManager;
+import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Request;
 
 public class HttpUtils {
     public static final String REQUEST_TAG = "okhttp";
+    private static Call sCall;
 
     private static Request builderGetRequest(String url) {
      return new Request.Builder()
@@ -14,14 +16,18 @@ public class HttpUtils {
              .build();
     }
 
-    public static void execute(String url, Callback callback) {
+    public static void executeByGet(String url, Callback callback) {
         Request request = builderGetRequest(url);
-        execute(request, callback);
+        executeByGet(request, callback);
     }
 
-    private static void execute(Request request, Callback callback) {
-        AppManager.getOkHttpClient().newCall(request).enqueue(callback);
+    private static void executeByGet(Request request, Callback callback) {
+        sCall = AppManager.getOkHttpClient().newCall(request);
+        sCall.enqueue(callback);
 
     }
 
+    public static void cancelLatestNewsCall() {
+        sCall.cancel();
+    }
 }

@@ -16,7 +16,7 @@ import melvinlin.com.mvpdemo.presenter.LatestNewsPresenter;
 /**
  * View層在一開始時關聯
  */
-public class LatestViewActivity extends AppCompatActivity implements ILatestNewsView{
+public class LatestViewActivity extends AppCompatActivity implements ILatestNewsView {
 
     private ListView mListView;
     private Context mContext;
@@ -29,13 +29,13 @@ public class LatestViewActivity extends AppCompatActivity implements ILatestNews
         setContentView(R.layout.activity_latest_view);
 
         mContext = this;
-        mLatestNewsPresenter = new LatestNewsPresenter(this);
+//        mLatestNewsPresenter = new LatestNewsPresenter(this);
         mListView = (ListView)findViewById(R.id.id_list_view);
         mBtnLatestNews = (Button)findViewById(R.id.id_btn_latest_news);
         mBtnLatestNews.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mLatestNewsPresenter.getDataFromServer();
+//                mLatestNewsPresenter.getDataFromServer();
             }
         });
     }
@@ -46,5 +46,25 @@ public class LatestViewActivity extends AppCompatActivity implements ILatestNews
             LatestNewsAdapter adapter = new LatestNewsAdapter(titles, mContext);
             mListView.setAdapter(adapter);
         }
+    }
+
+    @Override
+    public void showProgress(boolean isShow) {
+
+    }
+
+    @Override
+    public void showOkHttpError(int errorCode, String errorDesc, String errorUrl) {
+
+    }
+
+    @Override
+    public void showServerError(int errorCode, String errorDesc) {
+
+    }
+
+    @Override
+    public void showSuccess(boolean isSuccess) {
+
     }
 }

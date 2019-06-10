@@ -45,7 +45,7 @@ public class LatestNewsAdapter extends BaseAdapter {
         ViewHolder holder = null;
         if (convertView == null) {
             holder = new ViewHolder();
-            convertView = this.mInflater.inflate(R.layout.latest_news_title_item, parent, false);
+            convertView = this.mInflater.inflate(R.layout.latest_news_title_item, null);
             holder.title = (TextView) convertView.findViewById(R.id.id_tv_title);
             convertView.setTag(holder);
         } else {

@@ -27,24 +27,24 @@ public class RequestLatestNewsModel implements IRequestLatestModel {
 
     @Override
     public void requestLatestNews() {
-        HttpUtils.execute(Constants.LATEST_NEWS, new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                Log.d(TAG, ">> onFailure >> ");
-                e.printStackTrace();
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                if (!response.isSuccessful()) {
-                    Log.d(TAG, ">> onFailure >> Not successful");
-                }
-
-                String latestNewsJson = response.body().string();
-                if (!TextUtils.isEmpty(latestNewsJson)) {
-                    mLatestNewsPresenter.handleData(latestNewsJson);
-                }
-            }
-        });
+//        HttpUtils.execute(Constants.LATEST_NEWS, new Callback() {
+//            @Override
+//            public void onFailure(Call call, IOException e) {
+//                Log.d(TAG, ">> onFailure >> ");
+//                e.printStackTrace();
+//            }
+//
+//            @Override
+//            public void onResponse(Call call, Response response) throws IOException {
+//                if (!response.isSuccessful()) {
+//                    Log.d(TAG, ">> onFailure >> Not successful");
+//                }
+//
+//                String latestNewsJson = response.body().string();
+//                if (!TextUtils.isEmpty(latestNewsJson)) {
+//                    mLatestNewsPresenter.handleData(latestNewsJson);
+//                }
+//            }
+//        });
     }
 }
